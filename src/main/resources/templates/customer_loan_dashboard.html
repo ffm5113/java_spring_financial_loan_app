@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<!-- No longer needed if using data-th syntax: xmlns:th="http://www.thymeleaf.org"-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>eFinance Customer Loan(s)</title>
+    <!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css"
+              rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0"
+              crossorigin="anonymous">-->
+    <link data-th-href="@{/styles/atz.css}"
+          rel="stylesheet">
+</head>
+<body style="background-color:lightgrey;">
+<div data-th-replace="common/head :: head"></div>
+<br><br>
+<div class="container text-center">
+    <!--<h1>Welcome to eFinance!</h1>-->
+    <h1 data-th-text ="'Welcome to eFinance, ' + ${customer.firstName} + '!'"></h1>
+    <div data-th-replace="common/customer_logout_button :: customer_logout_button"></div>
+    <br><br>
+    <hr>
+    <!--    <a  data-th-href="@{/showCustomerLoginForm}" class="btn btn-primary"
+            data-th-onclick="return confirm('Are you sure you would like to log out?')">Logout
+        </a>-->
+</div>
+<div class="container my-2">
+    <h2>
+        <span data-th-if="${customerLoanArrayList.size() == 0}">Current Loan(s): None Found</span>
+        <span data-th-if="${customerLoanArrayList.size() > 0}"
+              data-th-text="'Current Loan(s): ' + ${customerLoanArrayList.size()} + ' Total'"></span>
+    </h2>
+    <table border="1" class = "table table-striped table-responsive-md" style="background-color:white;">
+        <thead>
+        <tr>
+            <th>Loan ID</th>
+            <th>Loan Start Date</th>
+            <th>Loan Principal ($)</th>
+            <th>Loan APR (%)</th>
+            <th>Loan Term (months)</th>
+            <th>Monthly Payment ($)</th>
+            <th>Loan Balance ($)</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- $ dialect used for variables -->
+        <tr data-th-each="loan : ${customerLoanArrayList}">
+            <td data-th-text="${loan.lId}"></td>
+            <td data-th-text="${loan.startDate}"></td>
+            <td data-th-text="${loan.getDoubleWithTwoDecimals(loan.principal)}"></td>
+            <td data-th-text="${loan.APR}"></td>
+            <td data-th-text="${loan.term}"></td>
+            <td data-th-text="${loan.getDoubleWithTwoDecimals(loan.monthlyPayment)}"></td>
+            <td data-th-text="${loan.getDoubleWithTwoDecimals(loan.balance)}"></td>
+            <!-- @ dialect used for links -->
+            <!-- Not yet implemented-->
+            <!-- <td> <a data-th-href="@{/showLoanDetails/{id}(id=${loan.loanId})}" class="btn btn-primary">View Loan</a>-->
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="container my-2">
+    <a data-th-href = "@{/loanAppForm/(cId=${customer.cId})}" class="btn btn-primary btn-sm mb-3">
+        Loan App Form
+    </a>
+    <br>
+    <!--    <a  data-th-href = "@{/showCustomerAppDashboard/(customerId=${customer.cId})}">Loan Application History</a>-->
+    <a  data-th-href = "@{/showCustomerAppDashboard/(cId=${customer.cId})}">Loan Application History</a>
+    <div class="container text-center">
+        <p>Contact Us <br>Phone: 800-123-4567<br>Email: efinance@atzfinance.com<br><br></p>
+    </div>
+</div>
+</body>

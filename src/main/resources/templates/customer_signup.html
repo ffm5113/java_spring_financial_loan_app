@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!-- No longer needed if using data-th syntax: xmlns:th="http://www.thymeleaf.org"-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>eFinance Customer Sign Up</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0"
+          crossorigin="anonymous">
+</head>
+<body style="background-color:lightgrey;">
+<div data-th-replace="common/head :: head"></div>
+<div class="container">
+    <h1>eFinance Customer Sign Up</h1>
+    <form action="#" data-th-action="@{/customerSignUp}" data-th-object="${customer}" method="POST">
+        <!-- Customer Id and SignUpDate are hidden-->
+        <input type="hidden" data-th-field="*{cId}">
+        <input type="hidden" data-th-field="*{signUpDate}">
+        <input type="text" data-th-field="*{firstName}"
+               placeholder="First Name" class="form-control mb-4 col-4" autofocus required>
+        <input type="text" data-th-field="*{lastName}"
+               placeholder="Last Name" class="form-control mb-4 col-4" required>
+        <input type="email" data-th-field="*{email}"
+               placeholder="Email Address" class="form-control mb-4 col-4" required>
+        <input type="text" data-th-field="*{password}"
+               placeholder="Password" class="form-control mb-4 col-4" required>
+        <input type="text" data-th-field="*{social}"
+               placeholder="SSN" class="form-control mb-4 col-4" minlength="9" maxlength="9" required>
+        <input type="number" data-th-field="*{income}"
+               placeholder="Current Annual Income" class="form-control mb-4 col-4"
+               min="0" max="10000000" step="1000" required>
+        <input type="text" data-th-field="*{address}"
+               placeholder="Street Address" class="form-control mb-4 col-4" required>
+        <input type="text" data-th-field="*{city}"
+               placeholder="City" class="form-control mb-4 col-4" required>
+        <input type="text" data-th-field="*{customerState}"
+               placeholder="State" class="form-control mb-4 col-4" minlength="2" maxlength="2" required>
+        <input type="text" data-th-field="*{zip}"
+               placeholder="Zip" class="form-control mb-4 col-4" minlength="5" maxlength="5" required>
+        <button type="submit" class="btn btn-primary"
+                data-th-onclick="return confirm('Please confirm Sign Up details before selecting \'Ok\'.')">
+            Sign Up</button>
+    </form>
+    <p></p> <!-- Spacing between button and hyperlink-->
+    <a data-th-href = "@{/showCustomerLoginForm}">Back to Login</a>
+    <p></p>
+</div>
+</body>
+</html>

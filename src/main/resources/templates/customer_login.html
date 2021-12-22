@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!-- No longer needed if using data-th syntax: xmlns:th="http://www.thymeleaf.org"-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>eFinance Customer Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0"
+          crossorigin="anonymous">
+</head>
+<body style="background-color:lightgrey;">
+<div data-th-replace="common/head :: head"></div>
+<div class="container">
+    <h1>eFinance Customer Login</h1>
+    <!-- Form acts on customer object-->
+    <form action="#" data-th-action="@{/customerLogin}" data-th-object="${customer}"
+          method="POST" >
+        <label for="email">Email</label>
+        <input type="email" id="email" data-th-field="*{email}" size="30"
+               placeholder="Enter Email Here" class="form-control mb-4 col-4" autofocus required>
+        <label for="password">Password</label>
+        <input type="password" id="password" data-th-field="*{password}" size="30"
+               placeholder="Enter Password Here" class="form-control mb-4 col-4" required>
+        <!-- Hidden type attributes to match customer model-->
+        <input type="hidden" data-th-field="*{cId}">
+        <input type="hidden" data-th-field="*{firstName}">
+        <input type="hidden" data-th-field="*{lastName}">
+        <input type="hidden" data-th-field="*{signUpDate}">
+        <input type="hidden" data-th-field="*{address}">
+        <input type="hidden" data-th-field="*{city}">
+        <input type="hidden" data-th-field="*{customerState}">
+        <input type="hidden" data-th-field="*{zip}">
+        <input type="hidden" data-th-field="*{social}">
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+    <p></p> <!-- Places hyperlinks on separate lines and separates them from button-->
+    <a data-th-href = "@{/showCustomerLoginForm}">Refresh</a>
+    <p></p>
+    <a data-th-href="@{/showCustomerSignUpForm}">Sign Up</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!-- No longer needed since using data-th syntax: xmlns:th="http://www.thymeleaf.org"-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>eFinance Loan Processor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0"
+          crossorigin="anonymous">
+</head>
+<body style="background-color:lightgrey;">
+<div data-th-replace="common/head :: head"></div>
+<div class="container text-center">
+    <h1>eFinance Loan Processor</h1>
+    <hr>
+<!--    <form action="#" data-th-action="@{/processLoanApp}"-->
+        <form action="#" data-th-action="@{/processLoanApp/{l}/{p}(l=${loanApp.lAId},p=${PIDD})}"
+          data-th-object="${loanApp}" method="POST">
+        <input type="hidden" data-th-field="*{date}">
+        <input type="hidden" data-th-field="*{principal}">
+        <input type="hidden" data-th-field="*{APR}">
+        <input type="hidden" data-th-field="*{approvedPersonnelId}" data-th-value="${PIDD}">
+        <input type="hidden" data-th-field="*{personnelId}" data-th-value="${PIDD}">
+        <input type="hidden" data-th-field="*{requestedStartDate}">
+        <input type="hidden" data-th-field="*{income}">
+        <input type="hidden" data-th-field="*{lAId}" data-th-value="${loanApp.lAId}">
+        <input type="hidden" data-th-field="*{term}">
+        <input type="hidden" data-th-field="*{customers}" data-th-value="${loanApp.getPrimaryCustomer().getcId()}">
+
+        <h2>Select a Loan Status:</h2>
+        <hr>
+        <div>
+            <input type="radio" id="Pending" name="status" data-th-value="'Pending Review'" checked>
+            <label for="Pending">Pending Review</label>
+            <br><br>
+            <input type="radio" id="DocumentsRequested" name="status" data-th-value="'Documents Requested'">
+            <label for="DocumentsRequested">Documents Requested</label>
+            <br><br>
+            <input type="radio" id="Approved" name="status" data-th-value="Approved">
+            <label for="Approved">Approved</label>
+            <br><br>
+            <input type="radio" id="NotApproved" name="status" data-th-value="'Not Approved'">
+            <label for="NotApproved">Not Approved</label>
+            <br><br>
+        </div>
+        <button type="submit" class="btn btn-primary"
+                data-th-onclick="return confirm('Please confirm Sign Up details before selecting \'Ok\'.')">
+            Submit</button>
+    </form>
+    <p></p> <!-- Spacing between button and hyperlink-->
+    <a data-th-href = "@{/showPersonnelLoanDashboard/(pId=${PIDD})}"
+        >Back to Personnel Loan Processing Dashboard
+    </a>
+</div>
+</body>
+</html>

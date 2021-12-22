@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!-- No longer needed since using data-th syntax: xmlns:th="http://www.thymeleaf.org"-->
+<html lang="en">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>eFinance Loan Personnel Manager</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0"
+          crossorigin="anonymous">
+</head>
+<body style="background-color:lightgrey;">
+<div data-th-replace="common/head :: head"></div>
+<div class="container">
+    <h1>eFinance Loan Personnel Manager</h1>
+    <hr>
+    <h2>Update Personnel</h2>
+    <form action="#" data-th-action="@{/updatePersonnel}" data-th-object="${personnel}" method="POST">
+        <!-- Add hidden form fields to handle update (id and password cannot be changed here)-->
+        <input type="hidden" data-th-field="*{pId}">
+        <input type="hidden" data-th-field="*{password}">
+        <input type="text" data-th-field="*{employeeId}" placeholder="Employee ID"
+               class="form-control mb-4 col-4" autofocus required>
+        <input type="text" data-th-field="*{firstName}" placeholder="First Name"
+               class="form-control mb-4 col-4" required>
+        <input type="text" data-th-field="*{lastName}" placeholder="Last Name"
+               class="form-control mb-4 col-4" required>
+        <input type="email" data-th-field="*{email}" placeholder="Email"
+               class="form-control mb-4 col-4" required>
+        <input type="text" data-th-field="*{adminPermissions}" placeholder="Admin Permissions"
+               class="form-control mb-4 col-4" minlength="1" maxlength="1" required>
+        <button type="submit" class="btn btn-primary"
+                data-th-onclick="return confirm('Are you sure you would like update this personnel?')">Update Personnel
+        </button>
+    </form>
+    <hr>
+    <a data-th-href = "@{/showPersonnelList/(pId=${currentPersonnelId})}">Back to Personnel List</a>
+    <p></p>
+</div>
+</body>
+</html>

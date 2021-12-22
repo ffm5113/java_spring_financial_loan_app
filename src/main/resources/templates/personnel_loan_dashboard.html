@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<!-- No longer needed since using data-th syntax: xmlns:th="http://www.thymeleaf.org"-->
+<html lang="en" xmlns:display="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>eFinance Personnel Loans List</title>
+    <!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css"
+              rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0"
+              crossorigin="anonymous">-->
+    <link data-th-href="@{/styles/atz.css}"
+          rel="stylesheet">
+</head>
+<body style="background-color:lightgrey;">
+<div data-th-replace="common/head :: head"></div>
+<div class="container text-center">
+    <h1 data-th-text ="'Welcome to eFinance, ' + ${personnelFirstName} + '!'"></h1>
+    <div data-th-replace="common/logout_button :: logout_button"></div>
+    <br><br>
+    <hr>
+</div>
+<div class="container text-center">
+    <!--<div class="container my-2">-->
+    <h2>
+        <span data-th-if="${loanAppArrayListToWork.size() == 0}">Current Loans List: None to Process</span>
+        <span data-th-if="${loanAppArrayListToWork.size() > 0}"
+              data-th-text="'Current Loan Apps Available for Processing: ' + ${loanAppArrayListToWork.size()} + ' Total'"></span>
+        <!--        Current Loans List-->
+    </h2>
+    <table border="1" class = "table table-striped table-responsive-md" style="background-color:white;">
+        <thead>
+        <tr>
+            <th>Loan App ID</th>
+            <th>Customer ID(s)</th>
+            <th>Date of Loan App</th>
+            <th>Loan App Requested Start Date</th>
+            <th>Loan App Annual Income ($)</th>
+            <th>Loan App Principal ($)</th>
+            <th>Loan App APR (%)</th>
+            <th>Loan App Term (months)</th>
+            <th>Loan App Status</th>
+            <th>Date Last Updated</th>
+            <th>Process Link</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- $ dialect used for variables -->
+        <tr data-th-each="loanApp : ${loanAppArrayListToWork}">
+            <td data-th-text="${loanApp.lAId}"></td>
+            <td data-th-text="${loanApp.customerIds()}"></td>
+            <td data-th-text="${loanApp.date}"></td>
+            <td data-th-text="${loanApp.requestedStartDate}"></td>
+            <td data-th-text="${loanApp.income}"></td>
+            <td data-th-text="${loanApp.getDoubleWithTwoDecimals(loanApp.principal)}"></td>
+            <td data-th-text="${loanApp.APR}"></td>
+            <td data-th-text="${loanApp.term}"></td>
+            <td data-th-text="${loanApp.status}"></td>
+            <td data-th-text="${loanApp.dateOfLastUpdate}"></td>
+            <!-- @ dialect used for links -->
+            <!--                <td> <a data-th-href="@{/showLoanAppProcess/{id}/{pid}(id=${loanApp.lAId},pid=${personnelId})}">Process</a>-->
+            <td> <a data-th-href="@{/showLoanAppProcess/(lAId = ${loanApp.lAId}, pId = ${pId})}">Process</a>
+        </tr>
+        </tbody>
+    </table>
+    <hr>
+    <h2>
+        <span data-th-if="${loanAppArrayListWorked.size() == 0}">Loan Apps Processed: None</span>
+        <span data-th-if="${loanAppArrayListWorked.size() > 0}"
+              data-th-text="'Loan Apps Processed: ' + ${loanAppArrayListWorked.size()} + ' Total'"></span>
+        <!--        Current Loans List-->
+    </h2>
+    <table border="1" class = "table table-striped table-responsive-md" style="background-color:white;">
+        <thead>
+        <tr>
+            <th>Loan App ID</th>
+            <th>Customer ID(s)</th>
+            <th>Date of Loan App</th>
+            <th>Loan App Requested Start Date</th>
+            <th>Loan App Annual Income ($)</th>
+            <th>Loan App Principal ($)</th>
+            <th>Loan App APR (%)</th>
+            <th>Loan App Term (months)</th>
+            <th>Loan App Status</th>
+            <th>Date Processed</th>
+            <th>Personnel ID</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- $ dialect used for variables -->
+        <tr data-th-each="loanApp : ${loanAppArrayListWorked}">
+            <td data-th-text="${loanApp.lAId}"></td>
+            <td data-th-text="${loanApp.customerIds()}"></td>
+            <td data-th-text="${loanApp.date}"></td>
+            <td data-th-text="${loanApp.requestedStartDate}"></td>
+            <td data-th-text="${loanApp.income}"></td>
+            <td data-th-text="${loanApp.getDoubleWithTwoDecimals(loanApp.principal)}"></td>
+            <td data-th-text="${loanApp.APR}"></td>
+            <td data-th-text="${loanApp.term}"></td>
+            <td data-th-text="${loanApp.status}"></td>
+            <td data-th-text="${loanApp.dateOfLastUpdate}"></td>
+            <td data-th-text="${loanApp.personnelId}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <p></p>
+</div>
+</body>
