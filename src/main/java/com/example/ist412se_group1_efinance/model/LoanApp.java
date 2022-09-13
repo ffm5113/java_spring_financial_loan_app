@@ -28,7 +28,7 @@ public class LoanApp implements Serializable{
     private String date;
     @Column(name = "principal")
     private Double principal;
-    @Column(name = "APR")
+    @Column(name = "apr")
     private Integer aPR;
     @Column(name = "term")
     private Integer term; // Integer can be null, int cannot
