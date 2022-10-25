@@ -11,4 +11,5 @@ Spring/Thymeleaf project implementing multiple use cases for a personal loan app
       <a href="https://github.com/ffm5113/java_spring_financial_loan_app/blob/master/Forrest_Moulin_eFinance_Spring_Thymeleaf_App_Example.pdf">Use Case Documentation</a>
   </li>
   </ul>
+  <br>
 Created by Forrest Moulin and James Bristow. 
