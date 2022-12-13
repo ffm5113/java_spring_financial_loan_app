@@ -10,11 +10,15 @@ import com.example.ist412se_group1_efinance.service.LoanAppService;
 // Spring imports
 //import com.example.ist412se_group1_efinance.service.LoanService;
 import com.example.ist412se_group1_efinance.service.PersonnelService;
-import org.springframework.beans.factory.annotation.Autowired; // Autowired annotations
+// Autowired annotations
+import org.springframework.beans.factory.annotation.Autowired; 
 // https://docs.spring.io/spring-data/commons/docs/current/api/org/springframework/data/domain/Page.html
-import org.springframework.stereotype.Controller; // Controller class annotation
-import org.springframework.ui.Model; // Model used as parameter for GetMapping methods
-// org.springframework.web.bind.annotation.* imports for web mapping/integration with thymeleaf templates
+// Controller class annotation
+import org.springframework.stereotype.Controller; 
+// Model used as parameter for GetMapping methods
+import org.springframework.ui.Model; 
+// org.springframework.web.bind.annotation.* imports 
+// for web mapping/integration with thymeleaf templates
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -43,16 +47,20 @@ public class LoanAppController {
          Customer customer = customerService.getCustomerById(customerId);
          LoanApp loanApp = new LoanApp();
          Set<Customer> customerSet = loanApp.getCustomers();
-         customerSet.add(customer); // Add current customer to HashSet, which will be passed to loanApp  template
+         // Add current customer to HashSet, passed to loanApp template
+         customerSet.add(customer); 
          // Pass model attributes to loanApp request template
          model.addAttribute("customerSet", customerSet);
          model.addAttribute("customer", customer);
          model.addAttribute("loanApp", loanApp);
          model.addAttribute("cId", customer.getcId());
-         Date date = new Date(); // Today's date
-         Calendar calendar = Calendar.getInstance(); // Calendar used to add days to today's date
+         // Date customer opened app form
+         Date date = new Date(); 
+         // Calendar used to add days to today's date
+         Calendar calendar = Calendar.getInstance(); 
          calendar.setTime(date);
-         calendar.add(Calendar.DAY_OF_MONTH, 3); // Provide 3 days for loan app processing
+         // Provide 3 days for loan app processing
+         calendar.add(Calendar.DAY_OF_MONTH, 3); 
          String formattedDate = dateFormat.format(calendar.getTime());
          model.addAttribute("date", formattedDate);
          return "loan_app_request";
@@ -80,7 +88,8 @@ public class LoanAppController {
         loanApp.calculateLoanAppIncome();
         loanAppService.saveLoanApp(loanApp);
         System.out.println("Loan App created: " + loanApp.toString());
-        return "redirect:/showCustomerAppDashboard/?cId=" + loanApp.getPrimaryCustomer().getcId();
+        return "redirect:/showCustomerAppDashboard/?cId=" + 
+            loanApp.getPrimaryCustomer().getcId();
     }
     @PostMapping("/processLoanApp/{l}/{p}")
     public String processLoanApp(@ModelAttribute("loanApp") LoanApp loanApp,
@@ -125,8 +134,6 @@ public class LoanAppController {
         return "redirect:/showPersonnelLoanDashboard/?pId=" + personnelId;
 
 }
-
-
     public String formatDate() {
         Date date = new Date();
         String formattedDate = dateFormat.format(date);
