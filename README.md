@@ -12,4 +12,4 @@ Spring/Thymeleaf project implementing multiple use cases for a personal loan app
   </li>
   </ul>
 
-Created by Forrest Moulin and James Bristow. 
+Copyright (c) 2021 Forrest Moulin and James Bristow
