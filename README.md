@@ -1,5 +1,5 @@
 # java_spring_financial_loan_app
-Spring/Thymeleaf project implementing multiple use cases for a personal loan application. 
+eFinance is a Spring/Thymeleaf project implementing multiple use cases for a personal loan application. Created by Forrest Moulin and James Bristow. 
 <ul>
   <li>
     <a href="https://github.com/ffm5113/java_spring_financial_loan_app/tree/master/src/main/resources">Front End Source Code</a>
